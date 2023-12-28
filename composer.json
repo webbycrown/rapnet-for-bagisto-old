@@ -1,0 +1,12 @@
+{
+    "name": "webbycrown/rapnet-for-bagisto",
+    "description": "Rapnet for Bagisto",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "WebbyCrown Solutions",
+            "email": "info@webbycrown.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
