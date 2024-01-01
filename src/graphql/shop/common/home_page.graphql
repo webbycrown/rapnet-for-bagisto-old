@@ -1,0 +1,114 @@
+# Shop\Common\HopePage Related APIs
+extend type Query {
+    getDefaultChannel: Channel @field(resolver: "Webkul\\GraphQLAPI\\Queries\\Shop\\Common\\HomePageQuery@getDefaultChannel")
+
+    newProducts(count: Int): [Product!] @field(resolver: "Webkul\\GraphQLAPI\\Queries\\Shop\\Common\\HomePageQuery@getNewProducts")
+
+    featuredProducts(count: Int): [Product!] @field(resolver: "Webkul\\GraphQLAPI\\Queries\\Shop\\Common\\HomePageQuery@getFeaturedProducts")
+
+    homeSliders(count: Int): [Slider!] @field(resolver: "Webkul\\GraphQLAPI\\Queries\\Shop\\Common\\HomePageQuery@getSliders")
+
+    advertisements: Advertise @field(resolver: "Webkul\\GraphQLAPI\\Queries\\Shop\\Common\\HomePageQuery@getAdvertisements")
+
+    homeCategories(categoryId: Int, categorySlug: String): [Category!] @field(resolver: "Webkul\\GraphQLAPI\\Queries\\Shop\\Common\\HomePageQuery@getCategories")
+
+    velocityHeaderContent: [HeaderContent!] @field(resolver: "Webkul\\GraphQLAPI\\Queries\\Shop\\Common\\HomePageQuery@getvelocityMetaData")
+
+    notificationList(
+        first: Int,
+        page: Int
+    ): [Notification!] @paginate(type: "PAGINATOR" defaultCount:10 model:"Webkul\\GraphQLAPI\\Models\\PushNotification")
+}
+
+extend type Mutation {
+    sendNotification(
+        input: NotificationInput!
+    ): NotificationResponse @field(resolver: "Webkul\\GraphQLAPI\\Mutations\\Shop\\Common\\NotificationMutation@send")
+}
+
+type Advertise {
+    advertisementFour: [AdvertiseData]
+    advertisementThree: [AdvertiseData]
+    advertisementTwo: [AdvertiseData]
+    cart: Cart @field(resolver: "Webkul\\GraphQLAPI\\Queries\\Velocity\\Cart@getCart")
+}
+
+type AdvertiseData {
+    image: String!
+    slug: String
+}
+
+type Notification {
+    id: ID!
+    image: String
+    imageUrl: String @rename(attribute: "image_url")
+    type: String
+    productCategoryId: ID @rename(attribute: "product_category_id")
+    status: Boolean
+    createdAt: DateTime @rename(attribute: "created_at")
+    updatedAt: DateTime @rename(attribute: "updated_at")
+    translations: [NotificationTranslation!] @hasMany
+}
+
+type NotificationTranslation {
+    id: ID!
+    title: String!
+    content: String!
+    locale: String!
+    channel: String!
+    pushNotificationId: ID! @rename(attribute: "push_notification_id")
+}
+
+type ThemeTranslation {
+    id: ID!
+    theme_customization_id: Int!
+    locale: String!
+    options: OptionFields!
+}
+
+type OptionFields {
+    title: String
+    css: String
+    html: String
+    images : [Link]
+    filters: FilterOption
+    column_1: [ColumOption]
+}
+
+type Link {
+    link: String
+    image: String
+}
+
+type FilterOption {
+    new: Int
+    sort: String
+    limit: Int
+    parent_id: Int
+    featured: Int
+}
+
+type ColumOption {
+    url: String
+    title: String
+}
+
+input NotificationInput {
+    id: ID!
+}
+
+type NotificationResponse {
+    status: Boolean
+    success: String
+    messageId: String @rename(attribute: "message_id")
+}
+
+type Slider {
+    id: Int
+    channel_id: Int
+    type: String!
+    name: String
+    sort_order: Int
+    status: Int
+    translations: [ThemeTranslation !] @hasMany
+}
