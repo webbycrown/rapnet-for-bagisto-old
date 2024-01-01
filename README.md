@@ -17,7 +17,7 @@ The Bagisto GraphQL API is made in collaboration with <a href="https://www.ucraf
 #### To clone Bagisto GraphQL run the below command from terminal:
 
 ~~~
-composer require bagisto/graphql-api dev-main
+composer require webbycrown/test-bagisto-lib
 ~~~
 
 * Add the below-line inside the **modules** index in **config/concord.php** file:
