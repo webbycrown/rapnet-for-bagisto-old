@@ -1,6 +1,7 @@
 {
     "name": "webbycrown/rapnet-for-bagisto",
     "description": "Rapnet for Bagisto",
+    "type": "library",
     "license": "MIT",
     "authors": [
         {
@@ -8,5 +9,11 @@
             "email": "info@webbycrown.com"
         }
     ],
+    "require": {
+        "php": ">=5.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7"
+    },
     "minimum-stability": "dev"
 }
