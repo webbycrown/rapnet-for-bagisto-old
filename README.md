@@ -88,4 +88,8 @@ http://your-domain.com/graphiql
 http://your-domain.com/graphql
 ~~~
 
+file:///home/webby-14/Downloads/group-573.webp
+-18:-42:63:63
+
+
 > That's it, now just execute the project on your specified domain.
